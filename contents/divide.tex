@@ -69,6 +69,17 @@ square with trominoes.
 \subsection*{Skyline Problem}
 \lipsum[1][1-2]
 \subsection*{Closest Pair of Points}
-\lipsum[1][1-2]
+The Closest Pair of Points Algorithm is an O(nlogn) solution to the problem of finding the closest pair of points
+when given a set of points with (x,y) coordinates. It has a base case of 2 points and a second base case of 3 points.
+Base case size 3 uses a brute force algorithm to return the closest pair. Base case size 2 returns that the distance between the two points.
+\begin{enumerate}
+    \item Sort the points based on their x coordinates (Use merge or quick)
+    \item Recursively split the sorted array in halves (like a merge sort does) until the base case of 3 or 2 is met.
+    \item To merge the halves, find the minimum distance out of the two halves, and label it delta. 
+    \item Create an Array of all of the points within 'delta' distance of the halfway line.
+    \item Sort this array based on the y coordinates (use merge or quick).
+    \item Brute force search for the smallest distance within this array (Max size of array is 8) 
+    \item This smallest distance is the true smallest distance for this section. Repeat the process.
+\end{enumerate}
 \subsection*{Strassen's Algorithm}
 \lipsum[1][1-2]
