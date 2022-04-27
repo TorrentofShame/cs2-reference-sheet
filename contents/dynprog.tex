@@ -2,6 +2,7 @@
 \subsection*{Fibonacci}
 The key idea here is that at any given point, we only need the previous two values in the sequence to calculate the next one. So, toggle back and forth with the term we overwrite. (Initially, to calculate F(2), we can add F(0) and F(1), and then discard F(0). To calculate F(3), we add F(2) and F(1) and then discard F(1). And so on.) If this function looks complex, tracing through a few iterations might clarify what's going on.
 
+\begin{lstlisting}[language=Java,basicstyle=\tiny]
 int ultraFancyFib(int n)
 {
    int [] f = new int[2];
@@ -14,12 +15,14 @@ int ultraFancyFib(int n)
 
    return f[n%2];
 }
+\end{lstlisting}
 
 \subsection*{Combinations}
 \lipsum[1][1-2]
 \subsection*{Longest Common Subsequence (LCS DP)}
 The trick here is to realize that at any given time, as we fill our row from left to right, there's only one value from the previous row that we might have to refer to that has already been overwritten. We can store that in a temporary variable at each iteration of the inner for-loop.
 
+\begin{lstlisting}[language=Java,basicstyle=\tiny]
 int lcss(String a, String b)
 {
    if (a.length() < b.length())
@@ -53,6 +56,7 @@ int lcss(String a, String b)
 
    return matrix[b.length()];
 }
+\end{lstlisting}
 
 \subsection*{Number of Ways to Make Change}
 \lipsum[1][1-2]
@@ -60,6 +64,7 @@ int lcss(String a, String b)
 \lipsum[1][1-2]
 \subsection*{0-1 Knapsack Problem}
 
+\begin{lstlisting}[language=Java,basicstyle=\tiny]
 public static int knapsack(Treasure [] t, int c)
 {
    int [][] matrix = new int[t.length + 1][c + 1];
@@ -76,9 +81,11 @@ public static int knapsack(Treasure [] t, int c)
 
    return matrix[t.length][c];
 }
+\end{lstlisting}
 
 \subsection*{Floyd-Warshall's Algorithm and path reconstruction}
 
+\begin{lstlisting}[language=Java,basicstyle=\tiny]
 // Floyd-Warshall's all shortest paths algorithm.
 private void allShortestPaths()
 {
@@ -112,6 +119,7 @@ private void allShortestPaths()
       for (int j = 1; j <= n; j++)
          System.out.printf("%5d%s", sp[i][j], (j == n) ? "\n" : "");
 }
+\end{lstlisting}
 
 \subsection*{Matrix Chain Multiplication}
 \lipsum[1][1-2]
