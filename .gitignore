@@ -1,0 +1,12 @@
+# This is generated, don't need to commit
+#*.pdf comitting anyway cause I ain't setting up ci-cd for this
+
+# Vimtex Junk, Auxiliary, & Log files
+.dvi
+*.log
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.xdv
+*.syn*tex*

@@ -1,0 +1,15 @@
+\section{Backtracking}
+Recursion, try ea.\ possibility and go next, if no work go back
+\begin{lstlisting}[language=Java,basicstyle=\tiny]
+// ex: Sudoku
+for (int i=1;i<=9;i++) { // place 1-9 for sudoku
+  if (check(r,c,i)) { // if can place value i
+    grid[r][c]=i; // place it
+    if (solve(r,c+1)) { // solve w/ board next pos
+      return true; // it's solved
+    }
+    // backtrack, rm val for later calls
+    grid[r][c]=0;
+  }
+}
+\end{lstlisting}

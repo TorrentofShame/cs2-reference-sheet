@@ -1,0 +1,47 @@
+\section{Java}
+\subsection*{ArrayList}
+A resizable array.
+\subsection*{LinkedList}
+A list of elements where ea.\ element points to the next.
+\subsection*{ArrayDeque}
+A resizable array that acts like a double ended queue, which means that you can enqueue
+and dequeue elements from both ends of the queue. This can be used as either a stack or a normal queue.
+\subsection*{TreeSet}
+An ordered set of unique values.
+\subsection*{TreeMap}
+Ordered keys mapped to values.
+\subsection*{HashSet}
+Unordered keys mapped to values.
+\subsection*{HashMap}
+An unordered set of unique values.
+\subsection*{Priority Queue}
+min or max, not both.
+\begin{lstlisting}[language=Java,basicstyle=\tiny]
+// Enqueue/Dequeue: O(log(n))
+pQueue.remove();
+pQueue.add();
+pQueue.poll();
+
+// Retrieval: O(1)
+pQueue.peek();
+pQueue.element();
+pQueue.size();
+\end{lstlisting}
+\subsection*{Custom Sorting}
+\begin{lstlisting}[language=Java,basicstyle=\tiny]
+import java.util.Arrays;
+import java.util.Comparator;
+
+Arrays.sort(ToSort,
+    new Comparator<ToSortClass>() {
+        @Override
+        public int compare(
+            ToSortClass o1, ToSortClass o2
+        ) {
+            return Integer.compare(o1.value,
+                                   o2.value);
+        }
+    }
+);
+\end{lstlisting}
+

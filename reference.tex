@@ -1,0 +1,65 @@
+% The format is taken (and subsequently updated to work with new package updates) from: https://github.com/kenfehling/latex-cheatsheet
+\documentclass[10pt,landscape,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[USenglish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lipsum}
+\usepackage[explicit]{titlesec}
+%\usepackage[LY1,T1]{fontenc}
+%\usepackage{frutigernext}
+%\usepackage[lf,minionint]{MinionPro}
+\usepackage{tikz}
+\usetikzlibrary{shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
+\usepackage[nosf]{kpfonts}
+\usepackage[t1]{sourcesanspro}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage[top=0mm,bottom=1mm,left=0mm,right=1mm]{geometry}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{microtype}
+\usepackage{pdfpages}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage[super]{nth}
+
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\renewcommand\arraystretch{1.25}
+
+\let\bar\overline
+
+\input{contents/def}
+
+\setlist{leftmargin=*,labelindent=\parindent}
+
+\newcommand\arraytable[8]{
+    \begin{tabularx}{\linewidth}{|X|X|X|X|X|X|X|X|}
+        \hline
+        #1 & #2 & #3 & #4 & #5 & #6 & #7 & #8 \\
+        \hline
+    \end{tabularx}
+    \begin{tabularx}{\linewidth}{XXXXXXXX}
+        1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+    \end{tabularx}
+}
+
+\begin{document}
+\footnotesize
+%\small
+\begin{multicols*}{5}
+    \input{contents/java}
+    \input{contents/backtracking}
+    \input{contents/datastructures}
+    \input{contents/algorithm}
+    \input{contents/sorting}
+    \input{contents/greedyalgos}
+    \input{contents/unweightedgraphs}
+    \input{contents/weightedgraphs}
+    \input{contents/divide}
+    \input{contents/dynprog}
+    \input{contents/probalgos}
+\end{multicols*}
+\end{document}

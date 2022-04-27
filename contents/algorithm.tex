@@ -1,0 +1,47 @@
+\section{Algorithm Analysis}
+{\scriptsize $\lg n=\log_2n$}
+\subsection*{Order Notation}
+\subsubsection*{Big-Oh ($O$)}
+Big-Oh is an upper bound. It simply guarantees that a function is no larger than a constant times a function $g(n)$, for $O(g(n))$.
+
+$f(n)=O(g(n))\textrm{ iff }\forall n\ge n_0$ \footnotesize{(const $n_0$)}
+
+$f(n)\le cg(n)\ \textrm{for some const } c$
+
+\subsubsection*{Big-Omega ($\Omega$)}
+$f(n)=\Omega(g(n))\textrm{ iff }\forall n\ge n_0$ \footnotesize{(const $n_0$)}
+
+$f(n)\ge cg(n)\ \textrm{for some const } c$
+
+\subsubsection*{Big-Theta ($\Theta$)}
+$f(n)=\Theta(g(n))\ \textrm{iff}\ f(n)=O(g(n))\\ \textrm{and}\ f(n)=\Omega(g(n))$
+
+$f(n)=\Theta(g(n))\\%
+\textrm{iff}\ \lim_{n\to\infty}\frac{f(n)}{g(n)}>0${\color{myblue},}
+{\scriptsize\color{myblue}where const $c$ and $c>0$}
+
+\subsection*{Master Theorem}
+$T(n)=\overbrace{A}^{\mathclap{\textrm{\# of sub probs in recursion}}}T\underbrace{\bigl(\frac{n}{B}\bigr)}_{\mathclap{\textrm{size of ea. sub problem}}}%
++\overbrace{O(n^k)}^{\mathrlap{\subalign{\text{c}&\text{ost of work done}\\\text{o}&\text{ut of recursive call}}}}$
+
+\resizebox{.75\linewidth}{!}{%
+$T(n)=\begin{cases}%
+B^k<A\Rightarrow O(n^{\log{B^A}})\\%
+B^k=A\Rightarrow O(n^{k}\lg{n})\\%
+B^k>A\Rightarrow O(n^{k})\\%
+\end{cases}$}
+\subsection*{Expectation Definition}
+$E(x)=\sum_{x\in X}x\cdot p(x)$
+\subsection*{Binomial Theorem}
+${\left(x+y\right)}^n=\sum_{k=0}^n\binom{n}{k}x^{k}y^{n-k}$
+
+$\overbrace{\binom{n}{k}}^{\mathrlap{\textrm{\# of ords of }k\textrm{ suc }n-k\textrm{ fail}}}%
+\underbrace{p^k}_{\mathrlap{\textrm{prob of k suc in their slots}}}%
+\overbrace{{\left(1-p\right)}^{n-k}}^{\mathrlap{\textrm{\raisebox{-.3\normalbaselineskip}[0pt][0pt]{same for fails}}}}$
+\subsection*{Binary Search Average Case Run Time}
+$O(\log n)$ % TODO: Show Math
+\subsection*{Make Heap Worst Case Run Time}
+$O(n\log n)$
+% TODO: Pic from review: https://cdn.discordapp.com/attachments/967445734842585088/968622073490587668/IMG_7722.jpg
+\subsection*{Quick Select Average Case Run Time}
+$O(n)$

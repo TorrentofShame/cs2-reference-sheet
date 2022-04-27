@@ -1,0 +1,149 @@
+\section{Greedy Algorithms}
+\subsection*{Fractional Knapsack}
+Goal is to maximize the value of a knapsack that can hold at most $W$ units worth
+of goods from a list of items $I_1,I_2, \dots I_n$.
+
+Each item has 2 attrs:
+\begin{enumerate}
+    \item A value/weight; let this be $v_i$ for item $I_i$.
+    \item Weight available; let this be $w_i$ for item $I_i$.
+\end{enumerate}
+The algorithm is as follows:
+\begin{enumerate}
+    \item Sort the items by value/unit.
+    \item Take as much as you can of the most expensive item left,
+        moving down the sorted list. You may end up taking a fractional portion
+        of the "last" item you take.
+\end{enumerate}
+\subsection*{Single Room Scheduling}
+Given a single room to schedule, and a list of requests, the goal of this problem
+is to maximize the total number of events scheduled.
+Each request simply consists of the group, a start time and an end time during the day.
+
+Here's the greedy solution:
+\begin{enumerate}
+    \item Sort the requests by finish time.
+    \item Go through the requests in order of finish time,
+        scheduling them in the room if the room is unoccupied at its start time.
+\end{enumerate}
+\subsection*{Multiple Room Scheduling}
+Given a set of requests with start and end times, the goal here is to schedule
+all events using the minimal number of rooms.
+Once again, a greedy algorithm will suffice:
+\begin{enumerate}
+    \item Sort all the requests by start time.
+    \item Schedule each event in any available empty room.
+        If no room is available, schedule the event in a new room.
+\end{enumerate}
+\subsection*{Change}
+The goal here is to give change with the minimal number of coins possible for a
+certain number of cents using 1 cent, 5 cent, 10 cent, and 25 cent coins.
+
+The greedy algorithm is to keep on giving as many coins of the
+largest denomination until you the value that remains to be
+given is less than the value of that denomination. Then you
+continue to the lower denomination and repeat until you've
+given out the correct change.
+\subsection*{Huffman Coding}
+For the following character frequencies:
+
+\begin{tabular}{cc}
+    Character & Frequency \\
+    a & 12\\
+    b & 2\\
+    c & 7\\
+    d & 13\\
+    e & 14\\
+    f & 85
+\end{tabular}
+
+Create a binary tree for each char that also stores the frequency w/ which it occurs.
+
+\columnbreak[0]
+The algorithm is as follows:
+\begin{enumerate}
+    \item Find the two bin trees in the list that store min freqs at their nodes.
+    \item Connect these two nodes at a newly created common node that will store NO
+        character but will store the sum of the freqs of all nodes connected below it.
+\end{enumerate}
+
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+    scale=0.4,
+    node/.style ={
+        rectangle,
+        fill=white,
+    },
+    pics/n/.style args={#1/#2}{
+        code={
+            \node[node] (#2) {#1 '#2'};
+        }
+    }
+    ]
+    \node (9) {$9$}
+        child{pic{n=2/b}}
+        child{pic{n=7/c}};
+    \pic[right=of 9]{n=12/a};
+    \pic[right=of a]{n=13/d};
+    \pic[right=of d]{n=14/e};
+    \pic[right=of e]{n=85/f};
+\end{tikzpicture}
+}
+
+Repeat until only one tree is left:
+
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+    scale=0.4,
+    level/.style={sibling distance=40em/#1},
+    node/.style ={
+        rectangle,
+    },
+    ]
+    \node[node] (133) {133}
+        child{
+            node (48) {48}
+                child{
+                    node (21) {21}
+                        child{
+                            node (9) {9}
+                                child{node[node] (b) {2 'b'}}
+                                child{node[node] (c) {7 'c'}}
+                        }
+                        child{node[node] (a) {12 'a'}}
+                }
+                child{
+                    node (27) {27}
+                        child{node[node] (d) {13 'd'}}
+                        child{node[node] (e) {14 'e'}}
+                }
+        }
+        child{node[node] (f) {85 'f'}};
+
+\end{tikzpicture}
+}
+
+One the tree is built, each leaf node corresponsds to a letter w/ a code.
+To determine the code for a node, walk a std search path from the root to the leaf node.
+
+For every step to the left, append a 0 to the code and for every step right, append a 1.
+
+For the ex.\ tree we get the codes:
+
+\begin{tabular}{cc}
+    Character & Code \\
+    a & 001\\
+    b & 0000\\
+    c & 0001\\
+    d & 010\\
+    e & 011\\
+    f & 1
+\end{tabular}
+\subsubsection*{Calculating Bits Saved}
+$\text{total bits}=\sum \text{char}_{\text{freq}}\cdot \text{char}_{\text{\# bits}}=\\%
+\left(12\cdot 3\right)_{a}+\cdots+\left(85\cdot 1\right)_{f}=238$
+
+Assuming the original file is storing each of the 6 chars with a 3-bit code.
+Since there are 133 such characters, the total num of bits used before huffman is $3\cdot 133=399$.
+
+$\therefore$ we saved $399 - 238 = 161$ bits.

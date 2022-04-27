@@ -1,0 +1,99 @@
+\section{Sorting}
+\subsection*{Lower Bounds}
+
+\subsubsection*{Comparison Sorts}
+% https://www.cs.ucf.edu/~dmarino/ucf/cop3503/lectures/MoreSorting01.pdf#page=5
+
+Given an input of n numbers to sort, they can be arranged in $n!$ different orders.
+With $k$ cols, each with 2 possible answers, there are $2^k$ possible distinct rows.
+$\Omega(n\log n)$
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{} ccccc @{}}
+    Input & $a[1]>a[2]$ & $a[1]>a[3]$ & $a[2]>a[3],\dots$ & $a[n-2]>a[n-1]$\\
+    2,1,4,3 & T & F & F & T\\
+    2,3,1,4 & F & T & T & F\\
+    4,3,2,1 & T & T & T & T
+\end{tabular}
+}
+
+\subsubsection*{Adjacent Element Swap Sorts}
+% https://www.cs.ucf.edu/~dmarino/ucf/cop3503/lectures/MoreSorting01.pdf#page=4
+
+An inversion in a list of numbers is a pair of numbers that are out of order relative to each other.
+
+The average number of inversions in a random list of distinct numbers is:
+
+$\frac{1}{2}\binom{n}{2}=\frac{n(n-1)}{2}=\Omega(n^2)$
+
+The average case run-time of all of these algorithms is $\Omega(n^2)$.
+
+
+\subsection*{Bucket Sort}
+Inputs randomly distributed in range $\left[x,N\right)$, for n amount of values, create different buckets to hold the values. $\frac{N}{n}$ will give the new ranges. $O(n)$
+
+Consider sorting a list of 10 numbers known to be in between 0 and 2, not including 2 itself. Thus, each bucket will store values in a range of $\frac{2}{10}=.2$ In particular, we have the following list:
+
+\begin{tabularx}{\linewidth}{XX}
+    Bucket & Range of Values\\
+    \toprule
+    0 & $\left[0,.2\right)$ \\
+    1 & $\left[.2,.4\right)$ \\
+    2 & $\left[.4,.6\right)$ \\
+    3 & $\left[.6,.8\right)$ \\
+    4 & $\left[.8,1\right)$ \\
+    5 & $\left[1,1.2\right)$ \\
+    6 & $\left[1.2,1.4\right)$ \\
+    7 & $\left[1.4,1.6\right)$ \\
+    8 & $\left[1.6,1.8\right)$ \\
+    9 & $\left[1.8,2\right)$
+\end{tabularx}
+
+\subsection*{Counting Sort}
+
+In counting sort, each of the values being sorted are in the range from 0 to m, inclusive.
+Here is the algorithm for sorting an array a[0],\dots,a[n-1]:
+
+\begin{enumerate}
+    \item Create an aux c, indexed from $c[0]$ to $c[m]$ and init each value in the array to 0.
+    \item Run through the input array a, tabulating the number of occurrences of each
+        value 0 through m by adding 1 to the value stored in the appropriate index in c.
+        (Thus, c is a freq array.)
+    \item Run through the array c, a \nth{2} time so that the value stored in each
+        array slot represents the number of elements $\le$ the index value in the
+        original array a.
+    \item Now, run through the original input array a, and for each value in a, use
+        the aux array c to tell you the proper placement of that value in the sorted
+        input, which will be stored in a new array $b[0]..b[n-1]$.
+    \item Copy the sorted array from b to a.
+\end{enumerate}
+
+% TODO: Add example maybe?
+
+\subsection*{Radix Sort}
+
+input: non-neg ints, k digits long, $O(nk)$.
+
+\begin{enumerate}
+    \item Sort the values using a $O(n)$ stable sort on the kth most sig.\ digit.
+    \item Decrement k by 1
+    \item Repeat step 1. (Unless $k=0$, then you're done.)
+\end{enumerate}
+
+\begin{tabular}{cccc}
+    unsorted & $v_1$ & $v_2$ & $v_3$\\
+    \toprule
+    235 & 162 & 628 & 162\\
+    162 & 734 & 734 & 175\\
+    734 & 674 & 235 & 235\\
+    175 & 235 & 237 & 237\\
+    237 & 175 & 162 & 628\\
+    674 & 237 & 674 & 674\\
+    628 & 628 & 175 & 734
+\end{tabular}
+
+$v_1$: sorted by units digit
+
+$v_2$: sorted by tens digit
+
+$v_3$: sorted by hundreds digit
