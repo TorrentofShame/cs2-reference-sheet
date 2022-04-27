@@ -82,4 +82,29 @@ Base case size 3 uses a brute force algorithm to return the closest pair. Base c
     \item This smallest distance is the true smallest distance for this section. Repeat the process.
 \end{enumerate}
 \subsection*{Strassen's Algorithm}
-\lipsum[1][1-2]
+The normal runtime for multipliying square matrices is O(n^3). Strassen's algorithm uses Divide and Conquor to do slightly better O(n^2.808).
+The Divide step: 
+Base case: For both matrices, matrix size is 2 by 2.
+Else: For both matrices, divide matrix into 4 sub matrices.
+The Conquer step: Note that every letter can represent a single number, or an entire square matrix. 
+Given a matrix $\big(\begin{smallmatrix}
+  a & b\\
+  c & d
+\end{smallmatrix}\big)$ 
+and a second matrix $\big(\begin{smallmatrix}
+  e & f\\
+  g & h
+\end{smallmatrix}\big)$ 
+We can define 7 products:
+S1 = (B − D)(G + H)
+S2 = (A + D)(E + H)
+S3 = (A − C)(E + F)
+S4 = (A + B)H
+S5 = A(F − H)
+S6 = D(G − E)
+S7 = (C + D)E.
+With these products, the product of the matrices can be represented as:
+\begin{bmatrix}
+S1 + S2 − S4 + S6 & S4 + S5\\
+S6 + S7 & S2 − S3 + S5 − S7
+\end{bmatrix}
