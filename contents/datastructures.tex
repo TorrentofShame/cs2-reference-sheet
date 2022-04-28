@@ -403,6 +403,71 @@ DB node has\ldots
         one into the fused child.
 \end{enumerate}
 
+\subsubsection*{Convert from a 2-4 Tree}
+Strategy:
+\begin{enumerate}%
+    \item Each {\bfseries\color{black}2-Node} should be colored {\bfseries\color{black}black}.
+    \item Each {\bfseries\color{black}3-Node} should be converted into {\bfseries\color{black}2} nodes, with its parent node being {\bfseries\color{black}black} and child being {\bfseries\color{red}red}.
+    \item Each {\bfseries\color{black}4-Node} should be converted into {\bfseries\color{black}3} nodes, with its parent node being {\bfseries\color{black}black} and {\bfseries\color{black}2} children being {\bfseries\color{red}red}.
+\end{enumerate}
+
+Example:
+
+\begin{tikzpicture}[scale=0.5]
+    \node (1020) [right=of 1] {10,20}
+        child {node (357) {3,5,7}
+                child {node (1b) {1}}
+                child {node (4b) {4}}
+                child {node (6b) {6}}
+                child {node (8b) {8}}
+        }
+        child{node (1) {15}
+            child {node (2) {2}
+                child {node (8) {12,13}}
+                child {node (17) {17}}
+            }
+            child {node (4) {4}}
+        }
+        child {node (2530) {25,30}
+            child {node (21b) {21}}
+            child {node (27b) {27}}
+            child {node (32b) {32}}
+        };
+    \node (before) [above=1mm of 1020] {Before};
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=0.5]
+    \node (10a) [right=of 1] {10}
+        child {node (5a) {5}
+                child {node (3a) {{\bfseries\color{red}3}}
+                    child {node (1a) {1}}
+                    child {node (4a) {4}}
+                }
+                child {node (7a) {{\bfseries\color{red}7}}
+                    child {node (6a) {8}}
+                    child {node (8a) {8}}
+                }
+                child {node (6b) {6}}
+                child {node (8b) {8}}
+        }
+        child{node (20a) {{\bfseries\color{red}20}}
+            child {node (15a) {15}
+                child {node (12a) {12}
+                    child {node (13a) {{\bfseries\color{red}13}}}
+                }
+                child {node (17a) {17}}
+            }
+            child {node (30a) {30}
+                child {node (25a) {{\bfseries\color{red}25}}
+                    child {node (21a) {21}}
+                    child {node (27a) {27}}
+                }
+                child {node (32a) {32}}
+            }
+        };
+    \node (before) [above=1mm of 10a] {After};
+\end{tikzpicture}
+
 \subsection*{Skip Lists}
 Stacks of linked lists.
 \subsubsection*{Insertion}
