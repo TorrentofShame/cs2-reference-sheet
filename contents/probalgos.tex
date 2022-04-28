@@ -1,7 +1,28 @@
 \section{Probabilistic Algorithms}
 \subsection*{Fermat's Theorem}
-\lipsum[1][1-2]
+
+$\forall$ prime numbers $p$ and positive ints $a$ such that gcd(a, p) = 1.
+
+$a^{p-1}\equiv(\mod p)$
+
 \subsection*{Miller-Rabin Primality Test}
-\lipsum[1][1-2]
+
+\begin{lstlisting}[language=Java,basicstyle=\tiny]
+public static boolean isPrime(int n) {
+ if (n < 2) return false;
+ for (int i=2; i*i<=n; i++)
+ if (n%i == 0)
+ return false;
+ return true;
+}
+\end{lstlisting}
+
+Even if a modulus operation happened in constant time (which for large integers this isn’t the
+case),
+
+the run time of this algorithm is $O(\sqrt{n})$. For large values of n (anything much beyond 1018),
+
+this isn’t feasible in a short amount of time.
+
 \subsection*{Rolling Hash Function and String Matching}
 \lipsum[1][1-2]

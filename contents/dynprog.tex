@@ -122,7 +122,59 @@ private void allShortestPaths()
 \end{lstlisting}
 
 \subsection*{Matrix Chain Multiplication}
-\lipsum[1][1-2]
+
+Consider computing A(BC):
+
+\# multiplications for (BC) = 10x50x20 = 10000, creating a
+
+10x20 answer matrix
+
+\# multiplications for A(BC) = 2x10x20 = 400,
+
+Total multiplications = 10000 + 400 = 10400.
+
+Consider computing (AB)C:
+
+\# multiplications for (AB) = 2x10x50 = 1000, creating a 2x50
+answer matrix
+
+\# multiplications for (AB)C = 2x50x20 = 2000,
+
+Total multiplications = 1000 + 2000 = 3000, a significant
+difference.
+
+Thus, the goal of the problem is given a chain of matrices to
+multiply, determine the fewest number of multiplications
+necessary to compute the product. We will formally define the
+problem below:
+
+Let $A = A_0\cdot A_1\cdot \cdots A_{n-1}$
+
+Let Ni,j denote the minimal number of multiplications
+necessary to find the product $A_i\cdot A_{i+1}\cdot\cdots A_j$.
+
+And let $d_i\times d_{i+1}$
+denote the dimensions of matrix Ai.
+
+We must attempt to determine the minimal number of
+multiplications necessary($N_{0,n-1}$) to find A, assuming that we
+simply do each single matrix multiplication in the standard
+method. 
+
+\begin{lstlisting}[language=Java,basicstyle=\tiny]
+int solveRec(int start, int end) {
+  if (start == end) return 0;
+  if (memo[start][end] != -1) return memo[start][end];
+    int res = solveRec(start, end-1) + d[start][0]*d[end][0]*d[end][0];
+      for (int i=start; i<end; i++) {
+    int tmp = solveRec(start, i) + solveRec(i+1, end) +
+              d[start][0]*d[i][1]*d[end][1];
+    res = Math.min(res, tmp);
+  }
+  return memo[start][end] = res;
+}
+\end{lstlisting}
+
 \subsection*{Edit Distance}
 \lipsum[1][1-2]
 \subsection*{Road Optimization Problem Idea}
