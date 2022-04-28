@@ -178,4 +178,35 @@ Base case size 3 uses a brute force algorithm to return the closest pair. Base c
     \item This smallest distance is the true smallest distance for this section. Repeat the process.
 \end{enumerate}
 \subsection*{Strassen's Algorithm}
-\lipsum[1][1-2]
+Recurrence relation is $T(n) = 7T(\frac{n}{2}) + O(n^2)$
+
+for a matrix C=AB
+where A and B are matrixes are n x n.
+
+matrix multiplication can be written as:
+
+$q1 = (a11 + a22) * (b11 + b22)$
+
+$q2 = (a21 + a22) * b11$
+
+$q3 = a11*( b12 - b22)$
+
+$q4 = a22 * (b21 - b11)$
+
+$q5 = (a11 + a12) * b22$
+
+$q6 = (a21 - a11) * (b11 + b12)$
+
+$q7 = (a12 - a22) * (b21 + b22)$
+
+-which makes C:
+
+$c11 = q1 + q4 - q5 + q7$
+
+$c12 = q3 + q5$
+
+$c21 = q2 + q4$
+
+$c22 = q1 + q3 - q2 + q6$
+
+This speeds up the process for bigger matrices which is $T(n) = O(n^3)$.
