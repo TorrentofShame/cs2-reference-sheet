@@ -69,9 +69,49 @@ square with trominoes.
 \subsection*{Skyline Problem}
 \lipsum[1][1-2]
 \subsection*{Closest Pair of Points}
-The Closest Pair of Points Algorithm is an O(nlogn) solution to the problem of finding the closest pair of points
-when given a set of points with (x,y) coordinates. It has a base case of 2 points and a second base case of 3 points.
+The Closest Pair of Points Algorithm is an $O(n\log n)$ solution to the problem of finding the closest pair of points
+when given a set of points with $(x,y)$ coordinates. It has a base case of 2 points and a second base case of 3 points.
 Base case size 3 uses a brute force algorithm to return the closest pair. Base case size 2 returns that the distance between the two points.
+
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}
+    \foreach \x/ \y in {1/2, -1/1.5, -0.5/1.75, 3/1.75, 1.5/1.5, 2.5/1,
+                        0.5/0.5, 1.5/1.75, 0.75/1.25, 0.25/2.25, 1.25/2, 1.75/1.5,
+                        2.25/3.5, 2.5/3, -0.75/1.25}
+        \filldraw[black] (\x,\y) circle (1pt);
+
+    \path[draw] (-1,1.5) -- (-0.5,1.75) node[midway,above] {$d_l$};
+
+    \path[draw] (1.5,1.5) -- (2.5,1) node[midway,above] {$d_r$};
+
+    % d line
+    \path[draw] (0,0) -- +(1,0) node[midway,above] {$d$} -- (2,0) node[midway,above] {$d$};
+
+    % d other line
+    \path[draw] (1,0) node[below] {(a)} -- +(0,4) node[above] {$x=m$};
+
+    \path[draw,dashed] (0,0) -- +(0,4)
+        (2,0) -- +(0,4);
+
+    % b
+
+    \path[draw,fill] (4,0) node[below] {(b)} -- +(0,2) node[above] {$x=m$}
+        ++(-0.5,0.75) -- +(1,0)
+        ++(0.75,0) circle (1pt) node[below] {$p$};
+
+    \path[draw,dashed] (3.5,0.75) -- +(90:0.5) node[midway, left] {$d_{\text{min}}$}
+        -- +(0.5,0.5) node[midway, above] {$d$} -- +(1,0.5) node[midway, above] {$d$}
+        -- +(1,0);
+
+\end{tikzpicture}
+}
+
+{\scriptsize
+(a) Idea of the divide-and-conquer algorithm for the closest-pair problem.
+
+(b) Rectangle that may contain points closer than $d_{\text{min}}$ to point $p$.
+}
+
 \begin{enumerate}
     \item Sort the points based on their x coordinates (Use merge or quick)
     \item Recursively split the sorted array in halves (like a merge sort does) until the base case of 3 or 2 is met.
