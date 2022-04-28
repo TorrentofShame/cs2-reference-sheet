@@ -67,7 +67,63 @@ square with trominoes.
 }
 
 \subsection*{Skyline Problem}
-\lipsum[1][1-2]
+
+You are to design a program to assist an architect in drawing the skyline of a
+city goven the locations of the buildings in the city.
+To make the problem tractable, all buildings are rect in shape and they share a common bottom.
+
+$T(n)=O(n\lg n)$
+
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[scale=0.1]
+    \path[draw] (0,0) -- (30,0);
+
+    \foreach \i in {0,5,10,15,20,25,30}
+        \node[below] () at (\i,-0.25) {\tiny$\i$};
+
+    \foreach \l/ \h/ \r in {1/11/5, 2/6/7, 3/13/9, 12/7/16, 14/3/25, 19/18/22,
+                            23/13/29, 24/4/28}
+        \path[draw] (\l,0) rectangle ++(\r-\l,\h);
+
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.1]
+    \path[draw] (0,0) -- (30,0);
+
+    \foreach \i in {0,5,10,15,20,25,30}
+        \node[below] () at (\i,-0.25) {\tiny$\i$};
+
+    \path[draw] (1,0) -- ++(90:11) -- ++(0:2) -- ++(90:2) -- ++(0:6)
+        -- ++(270:13) -- ++(0:3) -- ++(90:7) -- ++(0:4) -- ++(270:4)
+        -- ++(0:3) -- ++(90:15) -- ++(0:3) -- ++(270:15) -- ++(0:1)
+        -- ++(90:10) -- ++(0:6) -- ++(270:13);
+
+\end{tikzpicture}
+}
+
+You need to merge the buildings.
+
+\begin{lstlisting}[language=Java,basicstyle=\tiny]
+public static int[] mergeSky(
+    int[] skyA, int[] skyB
+) {
+    int[] res = new int[skyA.length+skyB.length+1];
+    int i = 0, j = 0, k = 0;
+    int curA = 0, curB = 0;
+    while (i<skyA.length || j<skyB.length) {
+        if (j>=skyB.length || (i<skyA.length && skyA[i]<skyB[j])){
+            res[k++] = skyA[i++];
+            curA = i<skyA.length ? skyA[i++] : 0;
+        }
+        else {
+            res[k++] = skyB[j++];
+            curB = j<skyB.length ? skyB[j++] : 0;
+        }
+        if (k<res.length) res[k++] = Math.max(curA, curB);
+    }
+    return res;
+}
+\end{lstlisting}
+
 \subsection*{Closest Pair of Points}
 The Closest Pair of Points Algorithm is an $O(n\log n)$ solution to the problem of finding the closest pair of points
 when given a set of points with $(x,y)$ coordinates. It has a base case of 2 points and a second base case of 3 points.
