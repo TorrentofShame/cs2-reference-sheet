@@ -413,13 +413,17 @@ Strategy:
 
 Example:
 
-\begin{tikzpicture}[scale=0.5]
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+        scale=0.4,
+        level/.style={sibling distance=20em/#1},
+    ]
     \node (1020) [right=of 1] {10,20}
         child {node (357) {3,5,7}
                 child {node (1b) {1}}
                 child {node (4b) {4}}
                 child {node (6b) {6}}
-                child {node (8b) {8}}
+                child {node[xshift=-2em] (8b) {8}} % manually shifting cause tis fucked
         }
         child{node (1) {15}
             child {node (2) {2}
@@ -435,8 +439,13 @@ Example:
         };
     \node (before) [above=1mm of 1020] {Before};
 \end{tikzpicture}
+}
 
-\begin{tikzpicture}[scale=0.5]
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+        scale=0.4, 
+        level/.style={sibling distance=20em/#1},
+    ]
     \node (10a) [right=of 1] {10}
         child {node (5a) {5}
                 child {node (3a) {{\bfseries\color{red}3}}
@@ -448,7 +457,7 @@ Example:
                     child {node (8a) {8}}
                 }
                 child {node (6b) {6}}
-                child {node (8b) {8}}
+                child {node[xshift=-2em] (8b) {8}} % manually shifting cause tis fucked
         }
         child{node (20a) {{\bfseries\color{red}20}}
             child {node (15a) {15}
@@ -467,6 +476,7 @@ Example:
         };
     \node (before) [above=1mm of 10a] {After};
 \end{tikzpicture}
+}
 
 \subsection*{Skip Lists}
 Stacks of linked lists.
